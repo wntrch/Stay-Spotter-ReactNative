@@ -1,13 +1,14 @@
 import { ScrollView, Text } from "react-native";
 
 
-const About = () => {
+
+const Contact = () => {
     return (
         <ScrollView>
-            <Text>About Page</Text>
+            <Text>Contact Page</Text>
         </ScrollView>
 
     );
 };
 
-export default About;
+export default Contact;

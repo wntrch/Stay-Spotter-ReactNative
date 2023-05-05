@@ -1,17 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import About from "./Screens/About";
-import Contact from "./Screens/Contact";
-
+import NavbarComponent from "./components/NavbarComponent";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>StaySpotter is here</Text>
-      <StatusBar style="auto" />
-      <About />
-      <Contact />
-    </View>
+    <NavigationContainer>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <NavbarComponent />
+      </View>
+    </NavigationContainer>
   );
 }
 
@@ -19,7 +18,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });

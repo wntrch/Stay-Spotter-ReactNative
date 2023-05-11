@@ -18,7 +18,7 @@ const HomeScreen = () => {
         <View style={styles.categoriesContainer}>
           <Image
             style={styles.categoryImage}
-            source={require("../assets/images/homepagebanner2.png")}
+            source={require("../assets/images/homepagebanner2.jpg")}
           />
           <Text style={styles.categoryText}>Beachside</Text>
         </View>

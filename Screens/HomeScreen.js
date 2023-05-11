@@ -1,9 +1,16 @@
 import React from "react";
-import { StyleSheet, FlatList, Text, View, Image } from "react-native";
+import {
+  StyleSheet,
+  FlatList,
+  Text,
+  View,
+  Image,
+  ScrollView,
+} from "react-native";
 
 const HomeScreen = () => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.bannerContainer}>
         <Image
           style={styles.bannerImage}
@@ -16,14 +23,31 @@ const HomeScreen = () => {
         </Text>
         <Text style={styles.subHeading}>Featured Rental Categories</Text>
         <View style={styles.categoriesContainer}>
-          <Image
-            style={styles.categoryImage}
-            source={require("../assets/images/homepagebanner2.jpg")}
-          />
-          <Text style={styles.categoryText}>Beachside</Text>
+          <View style={styles.category}>
+            <Image
+              style={styles.categoryImage}
+              source={require("../assets/images/beachside.jpg")}
+            />
+            <Text style={styles.categoryText}>Beachside</Text>
+          </View>
+
+          <View style={styles.category}>
+            <Image
+              style={styles.categoryImage}
+              source={require("../assets/images/lakefront.jpg")}
+            />
+            <Text style={styles.categoryText}>Lakefront</Text>
+          </View>
+          <View style={styles.category}>
+            <Image
+              style={styles.categoryImage}
+              source={require("../assets/images/urban.jpg")}
+            />
+            <Text style={styles.categoryText}>Urban Retreats</Text>
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -33,7 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   bannerContainer: {
-    height: "30%",
+    height: "20%",
   },
   bannerImage: {
     width: "100%",
@@ -55,9 +79,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   categoriesContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-around",
     marginTop: 20,
+  },
+  category: {
+    alignItems: "center",
+    marginBottom: 20,
   },
   categoryImage: {
     width: 100,

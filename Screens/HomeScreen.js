@@ -1,38 +1,25 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import { Tile } from "react-native-elements";
-
-const imageMapper = {
-  beachside: require("../assets/images/beachside.jpg"),
-  lakefront: require("../assets/images/lakefront.jpg"),
-  urban: require("../assets/images/urban.jpg"),
-};
 
 const HomeScreen = ({ navigation }) => {
   const categories = [
     {
       id: "beachside",
       name: "Beachside",
-      image: "../assets/images/beachside.jpg",
+      image: require("../assets/images/beachside.jpg"),
       description: "Enjoy the beachside view",
     },
     {
       id: "lakefront",
       name: "Lakefront",
-      image: "../assets/images/lakefront.jpg",
+      image: require("../assets/images/lakefront.jpg"),
       description: "Relax at the lakefront",
     },
     {
       id: "urban",
       name: "Urban Retreats",
-      image: "../assets/images/urban.jpg",
+      image: require("../assets/images/urban.jpg"),
       description: "Experience the urban lifestyle",
     },
   ];
@@ -56,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Tile
-            imageSrc={imageMapper[item.image]}
+            imageSrc={item.image}
             title={item.name}
             contentContainerStyle={styles.tileContent}
             caption={item.description}
@@ -88,6 +75,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: 20,
+    backgroundColor: "yellow",
   },
   heading: {
     fontSize: 24,

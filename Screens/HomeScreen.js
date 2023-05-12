@@ -1,16 +1,44 @@
 import React from "react";
 import {
   StyleSheet,
-  FlatList,
   Text,
   View,
   Image,
   ScrollView,
+  FlatList,
 } from "react-native";
+import { Tile } from "react-native-elements";
 
-const HomeScreen = () => {
+const imageMapper = {
+  beachside: require("../assets/images/beachside.jpg"),
+  lakefront: require("../assets/images/lakefront.jpg"),
+  urban: require("../assets/images/urban.jpg"),
+};
+
+const HomeScreen = ({ navigation }) => {
+  const categories = [
+    {
+      id: "beachside",
+      name: "Beachside",
+      image: "../assets/images/beachside.jpg",
+      description: "Enjoy the beachside view",
+    },
+    {
+      id: "lakefront",
+      name: "Lakefront",
+      image: "../assets/images/lakefront.jpg",
+      description: "Relax at the lakefront",
+    },
+    {
+      id: "urban",
+      name: "Urban Retreats",
+      image: "../assets/images/urban.jpg",
+      description: "Experience the urban lifestyle",
+    },
+  ];
+
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.bannerContainer}>
         <Image
           style={styles.bannerImage}
@@ -22,32 +50,24 @@ const HomeScreen = () => {
           Discover the perfect vacation rental at your fingertips.
         </Text>
         <Text style={styles.subHeading}>Featured Rental Categories</Text>
-        <View style={styles.categoriesContainer}>
-          <View style={styles.category}>
-            <Image
-              style={styles.categoryImage}
-              source={require("../assets/images/beachside.jpg")}
-            />
-            <Text style={styles.categoryText}>Beachside</Text>
-          </View>
-
-          <View style={styles.category}>
-            <Image
-              style={styles.categoryImage}
-              source={require("../assets/images/lakefront.jpg")}
-            />
-            <Text style={styles.categoryText}>Lakefront</Text>
-          </View>
-          <View style={styles.category}>
-            <Image
-              style={styles.categoryImage}
-              source={require("../assets/images/urban.jpg")}
-            />
-            <Text style={styles.categoryText}>Urban Retreats</Text>
-          </View>
-        </View>
       </View>
-    </ScrollView>
+      <FlatList
+        data={categories}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Tile
+            imageSrc={imageMapper[item.image]}
+            title={item.name}
+            contentContainerStyle={styles.tileContent}
+            caption={item.description}
+            featured
+            onPress={() =>
+              navigation.navigate("ListingsDetailScreen", { category: item })
+            }
+          />
+        )}
+      />
+    </View>
   );
 };
 
@@ -55,6 +75,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  scrollViewContent: {
+    flexGrow: 1,
   },
   bannerContainer: {
     height: "20%",

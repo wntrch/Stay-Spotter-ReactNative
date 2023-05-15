@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  FlatList,
+  ScrollView,
+} from "react-native";
 import { Tile } from "react-native-elements";
 
 const HomeScreen = ({ navigation }) => {
@@ -25,46 +32,79 @@ const HomeScreen = ({ navigation }) => {
   ];
 
   return (
-    <View style={styles.container}>
-      <View style={styles.bannerContainer}>
-        <Image
-          style={styles.bannerImage}
-          source={require("../assets/images/homepagebanner.png")}
-        />
-      </View>
-      <View style={styles.contentContainer}>
-        <Text style={styles.heading}>
-          Discover the perfect vacation rental at your fingertips.
-        </Text>
-        <Text style={styles.subHeading}>Featured Rental Categories</Text>
-      </View>
-      <FlatList
-        data={categories}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Tile
-            imageSrc={item.image}
-            title={item.name}
-            contentContainerStyle={styles.tileContent}
-            caption={item.description}
-            featured
-            onPress={() =>
-              navigation.navigate("ListingsDetailScreen", { category: item })
-            }
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.bannerContainer}>
+          <Image
+            style={styles.bannerImage}
+            source={require("../assets/images/homepagebanner.png")}
           />
-        )}
-      />
-    </View>
+        </View>
+        <View style={styles.contentContainer}>
+          <Text style={styles.heading}>
+            Discover the perfect vacation rental at your fingertips.
+          </Text>
+          <Text style={styles.subHeading}>Featured Rental Categories</Text>
+        </View>
+
+        {categories.map((category, index) => (
+          <View
+            key={index}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Tile
+              imageSrc={category.image}
+              title={category.name}
+              contentContainerStyle={styles.tileContent}
+              // caption={category.description}
+              featured
+              onPress={() =>
+                navigation.navigate("ListingsDetailScreen", { category: item })
+              }
+              titleStyle={{
+                backgroundColor: "rgba(0,0,0,0.5)",
+                color: "white",
+                padding: 10,
+              }}
+              // captionStyle={{
+              //   backgroundColor: "rgba(0,0,0,0.5)",
+              //   color: "white",
+              //   padding: 10,
+              // }}
+            />
+            {/* <Image
+              source={category.image}
+              style={{ height: 50, width: 50, display: "flex" }}
+            /> */}
+            {/* <Text
+              style={{
+                display: "flex",
+                borderWidth: 1,
+                borderColor: "black",
+                borderStyle: "dashed",
+                backgroundColor: "rgba(0,0,0,0.5)",
+                color: "white",
+                padding: 10,
+              }}
+            > */}
+            {/* {category.name}
+            </Text> */}
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: "#fff",
-  },
-  scrollViewContent: {
-    flexGrow: 1,
   },
   bannerContainer: {
     height: "20%",
@@ -75,13 +115,14 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: 20,
-    backgroundColor: "yellow",
+    backgroundColor: "#D2D2CF",
   },
   heading: {
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
     marginTop: 20,
+    backgroundColor: "#D2D2CF",
   },
   subHeading: {
     fontSize: 18,

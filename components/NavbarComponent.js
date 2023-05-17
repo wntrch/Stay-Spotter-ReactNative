@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../Screens/HomeScreen";
-import ListingsScreen from "../Screens/ListingsScreen";
+import FavoritesScreen from "../Screens/FavoritesScreen";
 import AboutScreen from "../Screens/AboutScreen";
 import ContactScreen from "../Screens/ContactScreen";
 // import LinearGradient from "react-native-linear-gradient";
@@ -38,8 +38,8 @@ const TabNavigator = () => (
     <Tab.Screen name="Home" component={HomeScreen} />
     <Tab.Screen
       name="Explore"
-      component={ListingsScreen}
-      options={{ headerTitle: "Explore Listings" }}
+      component={FavoritesScreen}
+      options={{ headerTitle: "Favorite Listings" }}
     />
     <Tab.Screen
       name="About"

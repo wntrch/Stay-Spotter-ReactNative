@@ -34,12 +34,6 @@ const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <View style={styles.bannerContainer}>
-          <Image
-            style={styles.bannerImage}
-            source={require("../assets/images/homepagebanner.png")}
-          />
-        </View>
         <View style={styles.contentContainer}>
           <Text style={styles.heading}>
             Discover the perfect vacation rental at your fingertips.
@@ -105,7 +99,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingBottom: 210,
   },
   bannerContainer: {
     height: "20%",

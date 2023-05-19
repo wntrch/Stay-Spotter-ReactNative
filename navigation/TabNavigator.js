@@ -1,13 +1,14 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "../Screens/HomeScreen";
-import FavoritesScreen from "../Screens/FavoritesScreen";
-import AboutScreen from "../Screens/AboutScreen";
-import ContactScreen from "../Screens/ContactScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeNavigator from "./HomeNavigator";
+import SavedNavigator from "./SavedNavigator";
+import AboutNavigator from "./AboutNavigator";
+import ContactNavigator from "./ContactNavigator";
 import { Icon } from "react-native-elements";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Tab = createBottomTabNavigator();
+
 const Stack = createStackNavigator();
 
 const screenOptions = {
@@ -28,9 +29,10 @@ const screenOptions = {
 const TabNavigator = () => (
   <Tab.Navigator screenOptions={screenOptions}>
     <Tab.Screen
-      name="Home"
-      component={HomeScreen}
+      name="HomeTab"
+      component={HomeNavigator}
       options={{
+        tabBarLabel: "Home",
         tabBarIcon: ({ focused, color, size }) => (
           <Icon
             name={focused ? "home" : "home-outline"}
@@ -39,13 +41,14 @@ const TabNavigator = () => (
             color={color}
           />
         ),
+        headerShown: false,
       }}
     />
     <Tab.Screen
-      name="Saved"
-      component={FavoritesScreen}
+      name="SavedTab"
+      component={SavedNavigator}
       options={{
-        headerTitle: "Saved Listings",
+        tabBarLabel: "Saved",
         tabBarIcon: ({ focused, color, size }) => (
           <Icon
             name={focused ? "heart" : "heart-outline"}
@@ -54,13 +57,14 @@ const TabNavigator = () => (
             color={color}
           />
         ),
+        headerShown: false,
       }}
     />
     <Tab.Screen
-      name="About"
-      component={AboutScreen}
+      name="AboutTab"
+      component={AboutNavigator}
       options={{
-        headerTitle: "About Us",
+        tabBarLabel: "About",
         tabBarIcon: ({ focused, color, size }) => (
           <Icon
             name={focused ? "information-circle" : "information-circle-outline"}
@@ -69,13 +73,14 @@ const TabNavigator = () => (
             color={color}
           />
         ),
+        headerShown: false,
       }}
     />
     <Tab.Screen
-      name="Contact"
-      component={ContactScreen}
+      name="ContactTab"
+      component={ContactNavigator}
       options={{
-        headerTitle: "Contact Us",
+        tabBarLabel: "Contact",
         tabBarIcon: ({ focused, color, size }) => (
           <Icon
             name={focused ? "mail" : "mail-outline"}
@@ -84,6 +89,7 @@ const TabNavigator = () => (
             color={color}
           />
         ),
+        headerShown: false,
       }}
     />
   </Tab.Navigator>
@@ -93,22 +99,18 @@ const NavbarComponent = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTintColor: "black",
-        // headerLeft: () => {
-        //   <Icon
-        //     name="menu"
-        //     size={24}
-        //     color="#fff"
-        //     style={{ marginLeft: 10 }}
-        //     onPress={() => navigation.openDrawer()}
-        //   />;
-        // },
+        headerTintColor: "#fff",
+        headerStyle: { backgroundColor: "#000" },
+        headerTitleStyle: { fontSize: 24 },
       }}
     >
       <Stack.Screen
         name="Root"
         component={TabNavigator}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          justifyContent: "center",
+        }}
       />
     </Stack.Navigator>
   );

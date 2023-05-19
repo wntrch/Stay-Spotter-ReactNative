@@ -1,49 +1,50 @@
-// ScrollViewFix
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
-import React from 'react';
-// import { Text, View, Image, ScrollView } from 'react-native';
-// main
 
 const About = () => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.contentContainer}>
-        <Text style={styles.heading}>
-          Our mission is to find every family the space they need to relax,
-          reconnect, and enjoy precious time away together
-          Our mission is to find every family the space they need to relax, reconnect, and enjoy precious time away together
-        </Text>
-      </View>
-      <View style={styles.bannerContainer}>
-        <Image
-          style={styles.bannerImage}
-          source={require('../assets/images/hammock.png')}
-        />
-      </View>
-      <Text style={styles.subHeading}>We Believe in Family Connection</Text>
-      <View style={styles.bannerContainer}>
-        <Image
-          style={styles.bannerImage}
-          source={require('../assets/images/wheel.png')}
-        />
-      </View>
-      <Text style={styles.subHeading}>Our Motto</Text>
-      <View style={styles.bannerContainer}>
-        <Image
-          style={styles.bannerImage}
-          source={require('../assets/images/pathtowater.png')}
-        />
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        <View style={styles.contentContainer}>
+          <Text style={styles.heading}>
+            Our mission is to find every family the space they need to relax,
+            reconnect, and enjoy precious time away together
+          </Text>
+        </View>
+        <View style={styles.bannerContainer}>
+          <Image
+            style={styles.bannerImage}
+            source={require("../assets/images/hammock.png")}
+          />
+        </View>
+        <Text style={styles.subHeading}>We Believe in Family Connection</Text>
+        <View style={styles.bannerContainer}>
+          <Image
+            style={styles.bannerImage}
+            source={require("../assets/images/wheel.png")}
+          />
+        </View>
         <Text style={styles.subHeading}>Our Motto</Text>
+        <View style={styles.bannerContainer}>
+          <Image
+            style={styles.bannerImage}
+            source={require("../assets/images/pathtowater.png")}
+          />
+          <Text style={styles.subHeading}>Our Motto</Text>
+        </View>
       </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  // container: {
-  //   // flex: "1",
-  //   // backgroundColor: "#fff",
-  // },
+  scrollContainer: {
+    flexGrow: 1,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    paddingBottom: 20,
+  },
   bannerContainer: {
     height: "30%",
   },
@@ -58,58 +59,16 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
-    flexGrow: 1,
-    backgroundColor: '#fff',
-  },
-  contentContainer: {
-    paddingHorizontal: 20,
-  },
-  bannerContainer: {
-    height: '30%',
-  },
-  bannerImage: {
-    width: '100%',
-    height: '100%',
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-// main
-    // marginTop: 20,
-    // marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 20,
   },
   subHeading: {
     fontSize: 18,
-// ScrollViewFix
-    // fontWeight: "bold",
-    // textAlign: "center",
-    // marginTop: 20,
-    // marginBottom: 20,
-  },
-  categoriesContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginTop: 20,
-  },
-  categoryImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 10,
-  },
-  categoryText: {
-    fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
-    marginTop: 10,
+    marginTop: 20,
+    marginBottom: 20,
   },
-// =======
-//     fontWeight: 'bold',
-//     textAlign: 'center',
-//     marginTop: 20,
-//     marginBottom: 20,
-//   },
-// main
 });
 
 export default About;

@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { Tile } from "react-native-elements";
+import { LinearGradient } from "expo-linear-gradient";
 
 const HomeScreen = ({ navigation }) => {
   const categories = [
@@ -33,49 +34,57 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.contentContainer}>
-          <Text style={styles.heading}>
-            Discover the perfect vacation rental at your fingertips.
-          </Text>
-          <Text style={styles.subHeading}>Featured Rental Categories</Text>
-        </View>
+      <LinearGradient
+        colors={["#666666", "#fdf200", "#fff"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={{ borderRadius: 5 }}
+      >
+        <View style={styles.container}>
+          <View style={styles.contentContainer}>
+            <Text style={styles.heading}>
+              Discover the perfect vacation rental at your fingertips.
+            </Text>
+            <Text style={styles.subHeading}>Featured Rental Categories</Text>
+          </View>
 
-        {categories.map((category, index) => (
-          <View
-            key={index}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Tile
-              imageSrc={category.image}
-              title={category.name}
-              contentContainerStyle={styles.tileContent}
-              // caption={category.description}
-              featured
-              onPress={() =>
-                navigation.navigate("ListingsDetailScreen", { category: item })
-              }
-              titleStyle={{
-                backgroundColor: "rgba(0,0,0,0.5)",
-                color: "white",
-                padding: 10,
+          {categories.map((category, index) => (
+            <View
+              key={index}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "row",
+                alignItems: "center",
               }}
-              // captionStyle={{
-              //   backgroundColor: "rgba(0,0,0,0.5)",
-              //   color: "white",
-              //   padding: 10,
-              // }}
-            />
-            {/* <Image
+            >
+              <Tile
+                imageSrc={category.image}
+                title={category.name}
+                contentContainerStyle={styles.tileContent}
+                // caption={category.description}
+                featured
+                onPress={() =>
+                  navigation.navigate("ListingsDetailScreen", {
+                    category: item,
+                  })
+                }
+                titleStyle={{
+                  backgroundColor: "rgba(0,0,0,0.5)",
+                  color: "white",
+                  padding: 10,
+                }}
+                // captionStyle={{
+                //   backgroundColor: "rgba(0,0,0,0.5)",
+                //   color: "white",
+                //   padding: 10,
+                // }}
+              />
+              {/* <Image
               source={category.image}
               style={{ height: 50, width: 50, display: "flex" }}
             /> */}
-            {/* <Text
+              {/* <Text
               style={{
                 display: "flex",
                 borderWidth: 1,
@@ -86,11 +95,12 @@ const HomeScreen = ({ navigation }) => {
                 padding: 10,
               }}
             > */}
-            {/* {category.name}
+              {/* {category.name}
             </Text> */}
-          </View>
-        ))}
-      </View>
+            </View>
+          ))}
+        </View>
+      </LinearGradient>
     </ScrollView>
   );
 };
@@ -98,7 +108,6 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
   bannerContainer: {
     height: "20%",
@@ -109,14 +118,12 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: 20,
-    backgroundColor: "#D2D2CF",
   },
   heading: {
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
     marginTop: 20,
-    backgroundColor: "#D2D2CF",
   },
   subHeading: {
     fontSize: 18,

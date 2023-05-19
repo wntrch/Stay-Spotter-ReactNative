@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,8 +9,15 @@ import {
 } from "react-native";
 import { Tile } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
+import { SearchBar } from "react-native-elements";
 
 const HomeScreen = ({ navigation }) => {
+  const [search, setSearch] = useState("");
+
+  const updateSearch = (search) => {
+    setSearch(search);
+  };
+
   const categories = [
     {
       id: "beachside",
@@ -45,6 +52,23 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.heading}>
               Discover the perfect vacation rental at your fingertips.
             </Text>
+            <SearchBar
+              placeholder="Enter a destination..."
+              onChangeText={updateSearch}
+              value={search}
+              containerStyle={{
+                backgroundColor: "#000",
+                padding: 5,
+                borderTopWidth: 0,
+                borderBottomWidth: 0,
+                borderRadius: 5,
+                marginTop: 10,
+                marginRight: 30,
+                marginLeft: 30,
+              }}
+              inputContainerStyle={{ backgroundColor: "#000", height: 30 }}
+              inputStyle={{ color: "#fff", fontSize: 14 }}
+            />
             <Text style={styles.subHeading}>Featured Rental Categories</Text>
           </View>
 
@@ -151,6 +175,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 10,
   },
+  search: {},
 });
 
 export default HomeScreen;

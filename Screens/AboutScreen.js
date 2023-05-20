@@ -1,3 +1,4 @@
+import React from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 
 const About = () => {
@@ -44,6 +45,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingBottom: 20,
+  },
+  contentContainer: {
+    paddingHorizontal: 20,
   },
   bannerContainer: {
     height: "30%",

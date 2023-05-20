@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,8 +8,16 @@ import {
   ScrollView,
 } from "react-native";
 import { Tile } from "react-native-elements";
+import { LinearGradient } from "expo-linear-gradient";
+import { SearchBar } from "react-native-elements";
 
 const HomeScreen = ({ navigation }) => {
+  const [search, setSearch] = useState("");
+
+  const updateSearch = (search) => {
+    setSearch(search);
+  };
+
   const categories = [
     {
       id: "beachside",
@@ -33,55 +41,74 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.bannerContainer}>
-          <Image
-            style={styles.bannerImage}
-            source={require("../assets/images/homepagebanner.png")}
-          />
-        </View>
-        <View style={styles.contentContainer}>
-          <Text style={styles.heading}>
-            Discover the perfect vacation rental at your fingertips.
-          </Text>
-          <Text style={styles.subHeading}>Featured Rental Categories</Text>
-        </View>
-
-        {categories.map((category, index) => (
-          <View
-            key={index}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Tile
-              imageSrc={category.image}
-              title={category.name}
-              contentContainerStyle={styles.tileContent}
-              // caption={category.description}
-              featured
-              onPress={() =>
-                navigation.navigate("ListingsDetailScreen", { category: item })
-              }
-              titleStyle={{
-                backgroundColor: "rgba(0,0,0,0.5)",
-                color: "white",
-                padding: 10,
+      <LinearGradient
+        colors={["#666666", "#fdf200", "#fff"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={{ borderRadius: 5 }}
+      >
+        <View style={styles.container}>
+          <View style={styles.contentContainer}>
+            <Text style={styles.heading}>
+              Discover the perfect vacation rental at your fingertips.
+            </Text>
+            <SearchBar
+              placeholder="Enter a destination..."
+              onChangeText={updateSearch}
+              value={search}
+              containerStyle={{
+                backgroundColor: "#000",
+                padding: 5,
+                borderTopWidth: 0,
+                borderBottomWidth: 0,
+                borderRadius: 5,
+                marginTop: 10,
+                marginRight: 30,
+                marginLeft: 30,
               }}
-              // captionStyle={{
-              //   backgroundColor: "rgba(0,0,0,0.5)",
-              //   color: "white",
-              //   padding: 10,
-              // }}
+              inputContainerStyle={{ backgroundColor: "#000", height: 30 }}
+              inputStyle={{ color: "#fff", fontSize: 14 }}
             />
-            {/* <Image
+            <Text style={styles.subHeading}>Featured Rental Categories</Text>
+          </View>
+
+          {categories.map((category, index) => (
+            <View
+              key={index}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Tile
+                imageSrc={category.image}
+                title={category.name}
+                contentContainerStyle={styles.tileContent}
+                // caption={category.description}
+                featured
+                onPress={() =>
+                  navigation.navigate("ListingsDetailScreen", {
+                    category: item,
+                  })
+                }
+                titleStyle={{
+                  backgroundColor: "rgba(0,0,0,0.5)",
+                  color: "white",
+                  padding: 10,
+                }}
+                // captionStyle={{
+                //   backgroundColor: "rgba(0,0,0,0.5)",
+                //   color: "white",
+                //   padding: 10,
+                // }}
+              />
+              {/* <Image
               source={category.image}
               style={{ height: 50, width: 50, display: "flex" }}
             /> */}
-            {/* <Text
+              {/* <Text
               style={{
                 display: "flex",
                 borderWidth: 1,
@@ -92,11 +119,12 @@ const HomeScreen = ({ navigation }) => {
                 padding: 10,
               }}
             > */}
-            {/* {category.name}
+              {/* {category.name}
             </Text> */}
-          </View>
-        ))}
-      </View>
+            </View>
+          ))}
+        </View>
+      </LinearGradient>
     </ScrollView>
   );
 };
@@ -104,8 +132,6 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    paddingBottom: 210,
   },
   bannerContainer: {
     height: "20%",
@@ -116,14 +142,12 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: 20,
-    backgroundColor: "#D2D2CF",
   },
   heading: {
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
     marginTop: 20,
-    backgroundColor: "#D2D2CF",
   },
   subHeading: {
     fontSize: 18,
@@ -151,6 +175,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 10,
   },
+  search: {},
 });
 
 export default HomeScreen;

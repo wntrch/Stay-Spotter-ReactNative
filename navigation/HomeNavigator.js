@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
+import ListingDetailScreen from "../screens/ListingDetailScreen";
 
 const HomeStack = createStackNavigator();
 
@@ -17,10 +18,14 @@ const HomeNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          title: "StaySpotter",
           justifyContent: "center",
           headerShown: false,
         }}
+      />
+      <HomeStack.Screen
+        name="ListingDetail"
+        component={ListingDetailScreen}
+        options={{ headerShown: true }}
       />
     </HomeStack.Navigator>
   );

@@ -133,4 +133,4 @@ const NavbarComponent = () => {
   );
 };
 
-export default NavbarComponent;
+export default TabNavigator;

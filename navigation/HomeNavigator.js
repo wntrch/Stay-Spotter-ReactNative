@@ -19,6 +19,7 @@ const HomeNavigator = () => {
         options={{
           title: "StaySpotter",
           justifyContent: "center",
+          headerShown: false,
         }}
       />
     </HomeStack.Navigator>

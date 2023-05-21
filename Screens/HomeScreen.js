@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Icon, SearchBar } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { categories } from "../data/categories";
+import { listings } from "../data/listings";
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, route }) => {
   const [search, setSearch] = useState("");
   const [spotType, setSpotType] = useState("all");
 
@@ -12,78 +14,19 @@ const HomeScreen = ({ navigation }) => {
     setSearch(search);
   };
 
-  const categories = [
-    {
-      id: "beachside",
-      name: "Beachside",
-      image: require("../assets/images/beachside.jpg"),
-      description: "Enjoy the beachside view",
-      spotType: "categories",
-    },
-    {
-      id: "lakefront",
-      name: "Lakefront",
-      image: require("../assets/images/lakefront.jpg"),
-      description: "Relax at the lakefront",
-      spotType: "categories",
-    },
-    {
-      id: "urban",
-      name: "Urban Retreats",
-      image: require("../assets/images/urban.jpg"),
-      description: "Experience the urban lifestyle",
-      spotType: "categories",
-    },
-    {
-      id: "resort",
-      name: "Resort",
-      image: require("../assets/images/homepagebanner.png"),
-      description: "Escape to a luxurious resort",
-      spotType: "trending",
-    },
-    {
-      id: "resort",
-      name: "Resort",
-      image: require("../assets/images/homepagebanner.png"),
-      description: "Escape to a luxurious resort",
-      spotType: "trending",
-    },
-    {
-      id: "resort",
-      name: "Resort",
-      image: require("../assets/images/homepagebanner.png"),
-      description: "Escape to a luxurious resort",
-      spotType: "trending",
-    },
-    {
-      id: "resort",
-      name: "Resort",
-      image: require("../assets/images/homepagebanner.png"),
-      description: "Escape to a luxurious resort",
-      spotType: "trending",
-    },
-    {
-      id: "resort",
-      name: "Resort",
-      image: require("../assets/images/homepagebanner.png"),
-      description: "Escape to a luxurious resort",
-      spotType: "trending",
-    },
-    {
-      id: "resort",
-      name: "Resort",
-      image: require("../assets/images/homepagebanner.png"),
-      description: "Escape to a luxurious resort",
-      spotType: "trending",
-    },
-    {
-      id: "resort",
-      name: "Resort",
-      image: require("../assets/images/homepagebanner.png"),
-      description: "Escape to a luxurious resort",
-      spotType: "trending",
-    },
-  ].filter((item) => spotType === "all" || item.spotType === spotType);
+  useEffect(() => {
+    if (route.params?.reset) {
+      setSpotType("all");
+    }
+    navigation.setParams({ reset: null });
+  }, [route.params?.reset]);
+
+  const filteredCategories = categories.filter(
+    (category) => spotType === "all" || category.spotType === spotType
+  );
+  const filteredListings = listings.filter(
+    (listing) => spotType === "all" || listing.spotType === spotType
+  );
 
   const chunkArray = (array, chunkSize) => {
     let result = [];
@@ -93,11 +36,30 @@ const HomeScreen = ({ navigation }) => {
     return result;
   };
 
-  const chunkedCategories = chunkArray(categories, 2);
+  const chunkedCategories = chunkArray(filteredCategories, 2);
+  const chunkedListings = chunkArray(filteredListings, 2);
 
   return (
     <>
       <View style={{ backgroundColor: "#000" }}>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
+            paddingTop: 30,
+          }}
+        >
+          <Image
+            source={require("../assets/images/logo.png")}
+            style={{
+              width: 50,
+              height: 50,
+              marginRight: 10,
+            }}
+          />
+          <Text style={styles.headerTitle}>StaySpotter</Text>
+        </View>
         <SearchBar
           placeholder="Enter a destination..."
           onChangeText={updateSearch}
@@ -135,18 +97,48 @@ const HomeScreen = ({ navigation }) => {
         </View>
       </View>
       <LinearGradient
-        colors={["#666666", "#fdf200", "#fff"]}
+        colors={["#666666", "#c9c9c9", "#fff"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        style={{ paddingBottom: 140 }}
+        style={{ flex: 1 }}
       >
         <ScrollView>
           {chunkedCategories.map((chunk, index) => (
             <View key={index} style={styles.row}>
               {chunk.map((category, index) => (
                 <View key={index} style={styles.categoryContainer}>
-                  <Image source={category.image} style={styles.categoryImage} />
-                  <Text style={styles.categoryText}>{category.name}</Text>
+                  <View style={styles.innerContainer}>
+                    <Image
+                      source={category.image}
+                      style={styles.categoryImage}
+                    />
+                  </View>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.categoryText}>{category.name}</Text>
+                    <Text style={styles.categoryCaption}>
+                      {category.description}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          ))}
+          {chunkedListings.map((chunk, index) => (
+            <View key={index} style={styles.row}>
+              {chunk.map((listing, index) => (
+                <View key={index} style={styles.categoryContainer}>
+                  <View style={styles.innerContainer}>
+                    <Image
+                      source={{ uri: listing.image }}
+                      style={styles.categoryImage}
+                    />
+                  </View>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.categoryText}>{listing.name}</Text>
+                    <Text style={styles.categoryCaption}>
+                      {listing.caption}
+                    </Text>
+                  </View>
                 </View>
               ))}
             </View>
@@ -154,160 +146,135 @@ const HomeScreen = ({ navigation }) => {
         </ScrollView>
       </LinearGradient>
     </>
-
-    // {categories.map((category, index) => (
-    //   <View
-    //     key={index}
-    //     style={{
-    //       display: "flex",
-    //       justifyContent: "space-between",
-    //       flexDirection: "row",
-    //       alignItems: "center",
-    //     }}
-    //   />
-    /* <Tile
-                imageSrc={category.image}
-                title={category.name}
-                contentContainerStyle={styles.tileContent}
-                // caption={category.description}
-                featured
-                onPress={() =>
-                  navigation.navigate("ListingsDetailScreen", {
-                    category: item,
-                  })
-                }
-                titleStyle={{
-                  backgroundColor: "rgba(0,0,0,0.5)",
-                  color: "white",
-                  padding: 10,
-                }}
-                captionStyle={{
-                  backgroundColor: "rgba(0,0,0,0.5)",
-                  color: "white",
-                  padding: 10,
-                }}
-              /> */
-    /* <Image
-                source={category.image}
-                style={{ height: 50, width: 50, display: "flex" }}
-              />
-              <Text
-                style={{
-                  display: "flex",
-                  borderWidth: 1,
-                  borderColor: "black",
-                  borderStyle: "dashed",
-                  backgroundColor: "rgba(0,0,0,0.5)",
-                  color: "white",
-                  padding: 10,
-                }}
-              >
-                {category.name}
-              </Text>
-            </View>
-          ))} */
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  bannerContainer: {
-    height: "20%",
-  },
-  bannerImage: {
-    width: "100%",
-    height: "100%",
-  },
-  contentContainer: {
-    paddingHorizontal: 20,
-  },
-  pipe: {
-    fontSize: 23, // Adjust the size as needed
+  // Header styles
+  headerTitle: {
     color: "#fff",
-    marginHorizontal: 10,
-    marginBottom: 3,
+    fontSize: 24,
+    textAlign: "center", // Make sure text is centered
   },
-  subHeadingContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 25,
-  },
-  subHeading: {
-    fontSize: 14,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#fff",
-  },
-  categoriesContainer: {
-    flexDirection: "column",
-    justifyContent: "space-around",
-    marginTop: 20,
-  },
-  category: {
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  categoryContainer: {
-    flex: 1,
-    margin: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-    // borderWidth: 1,
-    // borderColor: "black",
-    // borderStyle: "dashed",
-    // backgroundColor: "rgba(0,0,0,0.5)",
-  },
-  categoryImage: {
-    height: 100,
-    width: 100,
-    borderRadius: 5,
-  },
-  categoryText: {
-    color: "#000",
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginTop: 10,
-  },
+
+  // Search Bar styles
   searchBarContainer: {
     backgroundColor: "#000",
-    borderTopWidth: 0,
     borderBottomWidth: 0,
     borderRadius: 10,
-    marginTop: 20,
+    borderTopWidth: 0,
     marginBottom: 15,
-    marginRight: 45,
     marginLeft: 45,
-  },
-  searchBarInputContainer: {
-    backgroundColor: "#000",
-    borderColor: "#fff",
-    borderWidth: 1,
-    borderBottomWidth: 1,
-    height: 35,
+    marginRight: 45,
+    marginTop: 20,
   },
   searchBarInput: {
     color: "#fff",
     fontSize: 16,
-    paddingTop: 10,
     paddingBottom: 10,
+    paddingTop: 10,
   },
-  touchableArea: {
-    flexDirection: "row",
-    alignItems: "center",
+  searchBarInputContainer: {
+    backgroundColor: "#000",
+    borderBottomWidth: 1,
+    borderColor: "#fff",
+    borderWidth: 1,
+    height: 35,
   },
 
+  // Subheading styles
   iconTextContainer: {
-    flexDirection: "row",
     alignItems: "center",
+    flexDirection: "row",
+  },
+  pipe: {
+    color: "#fff",
+    fontSize: 23, // Adjust the size as needed
+    marginBottom: 3,
+    marginHorizontal: 10,
+  },
+  subHeading: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  subHeadingContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 25,
+  },
+
+  // Category styles
+  categoryContainer: {
+    flex: 1,
+    margin: 7,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 5,
+    paddingTop: 10,
+    backgroundColor: "#cac200",
+    borderRadius: 12,
+    shadowColor: "#000", // Here is the color of the shadow
+    shadowOffset: {
+      width: 0, // This is the horizontal offset of the shadow
+      height: 2, // This is the vertical offset of the shadow
+    },
+    shadowOpacity: 0.35, // This controls the opacity of the shadow
+    shadowRadius: 3.84, // This controls the blur radius of the shadow
+    elevation: 5,
+  },
+  categoryImage: {
+    borderRadius: 12,
+    height: 100,
+    width: "100%",
+  },
+  categoryText: {
+    color: "#000",
+    fontSize: 12,
+    fontWeight: "bold",
+    paddingTop: 5,
+  },
+  categoryCaption: {
+    color: "#000",
+    fontSize: 10,
+    paddingTop: 2,
+  },
+
+  // Container styles
+  contentContainer: {
+    paddingHorizontal: 20,
+  },
+  innerContainer: {
+    alignItems: "center",
+    width: "90%",
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 15,
+  },
+
+  // Text Container styles
+  textContainer: {
+    alignSelf: "stretch",
+    paddingLeft: 8,
+  },
+
+  // Touchable Area styles
+  touchableArea: {
+    alignItems: "center",
+    flexDirection: "row",
+  },
+
+  // Gradient Styles
+  bannerContainer: {
+    height: "20%",
+  },
+  bannerImage: {
+    height: "100%",
+    width: "100%",
   },
 });
 

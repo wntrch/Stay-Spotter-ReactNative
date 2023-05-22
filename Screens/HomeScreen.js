@@ -7,20 +7,29 @@ import { categories } from "../data/categories";
 import { listings } from "../data/listings";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { useDispatch } from "react-redux";
+import { toggleFavorite } from "../redux/slices/favoritesSlice";
 
 const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation, route }) => {
   const [search, setSearch] = useState("");
-  const [spotType, setSpotType] = useState("all");
+  const [spotType, setSpotType] = useState("listing");
 
   const updateSearch = (search) => {
     setSearch(search);
   };
 
+  const dispatch = useDispatch();
+
+  const handleAddToFavorites = (listing) => {
+    dispatch(toggleFavorite(listing.id));
+  };
+
   useEffect(() => {
     if (route.params?.reset) {
-      setSpotType("all");
+      setSpotType("listing");
     }
     navigation.setParams({ reset: null });
   }, [route.params?.reset]);
@@ -148,6 +157,17 @@ const HomeScreen = ({ navigation, route }) => {
                       source={{ uri: listing.image }}
                       style={styles.categoryImage}
                     />
+                    <TouchableOpacity
+                      style={styles.favIconContainer}
+                      onPress={() => handleAddToFavorites(listing)}
+                    >
+                      <Icon
+                        name="heart-outline"
+                        type="ionicon"
+                        size={18}
+                        color="#fff"
+                      />
+                    </TouchableOpacity>
                   </View>
                   <View style={styles.textContainer}>
                     <Text style={styles.categoryText}>{listing.name}</Text>
@@ -270,6 +290,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 15,
+  },
+  favIconContainer: {
+    position: "absolute",
+    top: 6,
+    right: 6,
+    width: 30,
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
+    borderRadius: 15, // Adjust this to match your design
+    padding: 5, // Also adjust this
   },
 
   // Text Container styles

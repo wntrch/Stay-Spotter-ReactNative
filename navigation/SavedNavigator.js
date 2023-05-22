@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import FavoritesScreen from "../screens/FavoritesScreen";
+import SavedScreen from "../screens/SavedScreen";
 import ListingDetailScreen from "../screens/ListingDetailScreen";
 
 const SavedStack = createStackNavigator();
@@ -16,7 +16,7 @@ const SavedNavigator = () => {
     >
       <SavedStack.Screen
         name="Saved"
-        component={FavoritesScreen}
+        component={SavedScreen}
         options={{
           headerShown: true,
           title: "Saved",

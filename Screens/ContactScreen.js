@@ -1,105 +1,86 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet, Image, Linking, TouchableOpacity } from 'react-native';
 
-const Contact = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [feedback, setFeedback] = useState("");
+const ContactPage = () => {
+  const handleEmailPress = () => {
+    Linking.openURL('mailto:example@example.com');
+  };
 
-  const handleSubmit = () => {
-    console.log({
-      firstName,
-      lastName,
-      phone,
-      email,
-      feedback,
-    });
+  const handleInstagramPress = () => {
+    Linking.openURL('https://www.instagram.com/example/');
+  };
+
+  const handlePhonePress = () => {
+    Linking.openURL('tel:1234567890');
+  };
+
+  const handleAddressPress = () => {
+    Linking.openURL('https://maps.google.com/?q=1234+ABC+Street+City+Country');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>First Name:</Text>
-      <TextInput
-        style={styles.input}
-        value={firstName}
-        onChangeText={setFirstName}
+      <Image
+        source={require('../assets/images/lakefront.jpg')} // Replace with your image path
+        style={styles.image}
       />
-
-      <Text style={styles.label}>Last Name:</Text>
-      <TextInput
-        style={styles.input}
-        value={lastName}
-        onChangeText={setLastName}
-      />
-
-      <Text style={styles.label}>Phone:</Text>
-      <TextInput style={styles.input} value={phone} onChangeText={setPhone} />
-
-      <Text style={styles.label}>Email:</Text>
-      <TextInput style={styles.input} value={email} onChangeText={setEmail} />
-
-      <Text style={styles.label}>Feedback:</Text>
-      <TextInput
-        style={[styles.input, styles.feedbackInput]}
-        multiline
-        numberOfLines={5}
-        value={feedback}
-        onChangeText={setFeedback}
-      />
-
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+      <Text style={styles.heading}>Contact Information</Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={handleEmailPress} style={styles.button}>
+          <Text style={styles.buttonText}>Email</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleInstagramPress} style={styles.button}>
+          <Text style={styles.buttonText}>Instagram</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handlePhonePress} style={styles.button}>
+          <Text style={styles.buttonText}>Phone</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleAddressPress} style={styles.button}>
+          <Text style={styles.buttonText}>Address</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#fdf200",
-    backgroundColor: "#fdf200",
-    padding: 10,
-    borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f0f0f0',
+    padding: 20,
+  },
+  image: {
+    width: 400,
+    height: 300,
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  buttonContainer: {
+    alignItems: 'center',
     marginTop: 10,
+  },
+  button: {
+    backgroundColor: '#f0f0f0',
+    borderColor: '#cac200',
+    borderWidth: 2,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 5,
     marginBottom: 10,
-    marginRight: 55,
-    marginLeft: 55,
-    borderColor: "#000",
+    width: '100%',
+    alignItems: 'center',
   },
   buttonText: {
-    color: "#000",
+    color: 'black',
     fontSize: 16,
-    fontWeight: "bold",
-  },
-  container: {
-    padding: 10,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 5,
-  },
-  input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  feedbackInput: {
-    height: 100,
+    fontWeight: 'bold',
   },
 });
 
-export default Contact;
+export default ContactPage;

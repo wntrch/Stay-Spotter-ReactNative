@@ -1,7 +1,7 @@
 export const listings = [
   {
     id: 0,
-    name: "Tiny A-Frame Home",
+    name: "Tiny A-Frame Cabin",
     image:
       "https://a0.muscache.com/im/pictures/2e24b098-41ed-4d92-80c0-1e8d65bfbce4.jpg?im_w=1200",
     link: "https://www.airbnb.com/rooms/40711723?federated_search_id=f5dd3120-89e1-4c93-b8d4-d620ddf1104d&source_impression_id=p3_1677813421_ONKaUPjEjqCJG9eo&guests=1&adults=1",

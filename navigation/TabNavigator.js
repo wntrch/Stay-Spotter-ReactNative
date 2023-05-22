@@ -40,7 +40,7 @@ const TabNavigator = () => {
             e.preventDefault();
 
             navigation.navigate("HomeTab", {
-              screen: "HomeScreen",
+              screen: "Home",
               params: { reset: true },
             });
           },

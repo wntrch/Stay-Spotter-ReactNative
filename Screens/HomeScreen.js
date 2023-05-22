@@ -115,19 +115,17 @@ const HomeScreen = ({ navigation, route }) => {
                   style={styles.categoryContainer}
                   onPress={() => setSpotType(category.id)}
                 >
-                  <View key={index} style={styles.categoryContainer}>
-                    <View style={styles.innerContainer}>
-                      <Image
-                        source={category.image}
-                        style={styles.categoryImage}
-                      />
-                    </View>
-                    <View style={styles.textContainer}>
-                      <Text style={styles.categoryText}>{category.name}</Text>
-                      <Text style={styles.categoryCaption}>
-                        {category.description}
-                      </Text>
-                    </View>
+                  <View style={styles.innerContainer}>
+                    <Image
+                      source={category.image}
+                      style={styles.categoryImage}
+                    />
+                  </View>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.categoryText}>{category.name}</Text>
+                    <Text style={styles.categoryCaption}>
+                      {category.description}
+                    </Text>
                   </View>
                 </TouchableOpacity>
               ))}
@@ -145,19 +143,17 @@ const HomeScreen = ({ navigation, route }) => {
                     })
                   }
                 >
-                  <View key={index} style={styles.categoryContainer}>
-                    <View style={styles.innerContainer}>
-                      <Image
-                        source={{ uri: listing.image }}
-                        style={styles.categoryImage}
-                      />
-                    </View>
-                    <View style={styles.textContainer}>
-                      <Text style={styles.categoryText}>{listing.name}</Text>
-                      <Text style={styles.categoryCaption}>
-                        {listing.caption}
-                      </Text>
-                    </View>
+                  <View style={styles.innerContainer}>
+                    <Image
+                      source={{ uri: listing.image }}
+                      style={styles.categoryImage}
+                    />
+                  </View>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.categoryText}>{listing.name}</Text>
+                    <Text style={styles.categoryCaption}>
+                      {listing.caption}
+                    </Text>
                   </View>
                 </TouchableOpacity>
               ))}
@@ -228,7 +224,7 @@ const styles = StyleSheet.create({
 
   // Category styles
   categoryContainer: {
-    flex: 1,
+    width: "46%",
     margin: 7,
     justifyContent: "center",
     alignItems: "center",
@@ -236,13 +232,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: "#cac200",
     borderRadius: 12,
-    shadowColor: "#000", // Here is the color of the shadow
+    shadowColor: "#000",
     shadowOffset: {
-      width: 0, // This is the horizontal offset of the shadow
-      height: 2, // This is the vertical offset of the shadow
+      width: 0, // horizontal offset of shadow
+      height: 2, // vertical offset of shadow
     },
-    shadowOpacity: 0.35, // This controls the opacity of the shadow
-    shadowRadius: 3.84, // This controls the blur radius of the shadow
+    shadowOpacity: 0.35,
+    shadowRadius: 3.84, // blur radius of shadow
     elevation: 5,
   },
   categoryImage: {
@@ -280,6 +276,8 @@ const styles = StyleSheet.create({
   textContainer: {
     alignSelf: "stretch",
     paddingLeft: 8,
+    paddingRight: 8,
+    height: 50,
   },
 
   // Touchable Area styles

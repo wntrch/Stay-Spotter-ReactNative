@@ -8,7 +8,7 @@ import { listings } from "../data/listings";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../redux/slices/favoritesSlice";
 
 const Stack = createStackNavigator();
@@ -22,6 +22,7 @@ const HomeScreen = ({ navigation, route }) => {
   };
 
   const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites);
 
   const handleAddToFavorites = (listing) => {
     dispatch(toggleFavorite(listing.id));
@@ -162,10 +163,16 @@ const HomeScreen = ({ navigation, route }) => {
                       onPress={() => handleAddToFavorites(listing)}
                     >
                       <Icon
-                        name="heart-outline"
+                        name={
+                          favorites.includes(listing.id)
+                            ? "heart"
+                            : "heart-outline"
+                        }
                         type="ionicon"
                         size={18}
-                        color="#fff"
+                        color={
+                          favorites.includes(listing.id) ? "#f50" : "white"
+                        }
                       />
                     </TouchableOpacity>
                   </View>

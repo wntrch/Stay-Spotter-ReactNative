@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Icon, SearchBar } from "react-native-elements";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 import { categories } from "../data/categories";
 import { listings } from "../data/listings";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation, route }) => {
   const [search, setSearch] = useState("");
@@ -25,7 +29,7 @@ const HomeScreen = ({ navigation, route }) => {
     (category) => spotType === "all" || category.spotType === spotType
   );
   const filteredListings = listings.filter(
-    (listing) => spotType === "all" || listing.spotType === spotType
+    (listing) => spotType === "all" || listing.spotType.includes(spotType)
   );
 
   const chunkArray = (array, chunkSize) => {
@@ -106,40 +110,56 @@ const HomeScreen = ({ navigation, route }) => {
           {chunkedCategories.map((chunk, index) => (
             <View key={index} style={styles.row}>
               {chunk.map((category, index) => (
-                <View key={index} style={styles.categoryContainer}>
-                  <View style={styles.innerContainer}>
-                    <Image
-                      source={category.image}
-                      style={styles.categoryImage}
-                    />
+                <TouchableOpacity
+                  key={index}
+                  style={styles.categoryContainer}
+                  onPress={() => setSpotType(category.id)}
+                >
+                  <View key={index} style={styles.categoryContainer}>
+                    <View style={styles.innerContainer}>
+                      <Image
+                        source={category.image}
+                        style={styles.categoryImage}
+                      />
+                    </View>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.categoryText}>{category.name}</Text>
+                      <Text style={styles.categoryCaption}>
+                        {category.description}
+                      </Text>
+                    </View>
                   </View>
-                  <View style={styles.textContainer}>
-                    <Text style={styles.categoryText}>{category.name}</Text>
-                    <Text style={styles.categoryCaption}>
-                      {category.description}
-                    </Text>
-                  </View>
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
           ))}
           {chunkedListings.map((chunk, index) => (
             <View key={index} style={styles.row}>
               {chunk.map((listing, index) => (
-                <View key={index} style={styles.categoryContainer}>
-                  <View style={styles.innerContainer}>
-                    <Image
-                      source={{ uri: listing.image }}
-                      style={styles.categoryImage}
-                    />
+                <TouchableOpacity
+                  key={index}
+                  style={styles.categoryContainer}
+                  onPress={() =>
+                    navigation.navigate("ListingDetail", {
+                      item: listing,
+                    })
+                  }
+                >
+                  <View key={index} style={styles.categoryContainer}>
+                    <View style={styles.innerContainer}>
+                      <Image
+                        source={{ uri: listing.image }}
+                        style={styles.categoryImage}
+                      />
+                    </View>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.categoryText}>{listing.name}</Text>
+                      <Text style={styles.categoryCaption}>
+                        {listing.caption}
+                      </Text>
+                    </View>
                   </View>
-                  <View style={styles.textContainer}>
-                    <Text style={styles.categoryText}>{listing.name}</Text>
-                    <Text style={styles.categoryCaption}>
-                      {listing.caption}
-                    </Text>
-                  </View>
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
           ))}

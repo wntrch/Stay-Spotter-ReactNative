@@ -6,41 +6,99 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  Alert,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { listings } from "../data/listings";
+import { SwipeRow } from "react-native-swipe-list-view";
+import { toggleFavorite } from "../redux/slices/favoritesSlice";
 
 const SavedScreen = ({ navigation }) => {
   const favorites = useSelector((state) => state.favorites);
+  const dispatch = useDispatch();
 
-  const renderFavoriteItem = ({ item }) => {
+  const renderFavoriteListing = ({ item: listing }) => {
+    const handleDelete = (listing) => {
+      Alert.alert(
+        "Delete Favorite?",
+        "Are you sure you wish to delete the favorite listing " +
+          listing.name +
+          "?",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log(listing.name + " Not Deleted"),
+            style: "cancel",
+          },
+          {
+            text: "OK",
+            onPress: () => dispatch(toggleFavorite(listing.id)),
+          },
+        ],
+        { cancelable: false }
+      );
+    };
+
     return (
-      <TouchableOpacity
-        style={styles.listingContainer}
-        onPress={() => navigation.navigate("ListingDetail", { item: item })}
-      >
-        <View style={styles.rowContainer}>
-          <Image source={{ uri: item.image }} style={styles.listingImage} />
-          <View style={styles.textContainer}>
-            <Text style={styles.listingText}>{item.name}</Text>
-            <Text style={styles.listingCaption}>{item.location}</Text>
-            <Text style={styles.listingCaption}>{item.details}</Text>
-          </View>
+      <SwipeRow rightOpenValue={-100}>
+        <View style={styles.deleteView}>
+          <TouchableOpacity
+            style={styles.deleteTouchable}
+            onPress={() => handleDelete(listing)}
+          >
+            <Text style={styles.deleteText}>Delete</Text>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.listingContainer}
+          onPress={() =>
+            navigation.navigate("ListingDetail", { item: listing })
+          }
+        >
+          <View style={styles.rowContainer}>
+            <Image
+              source={{ uri: listing.image }}
+              style={styles.listingImage}
+            />
+            <View style={styles.textContainer}>
+              <Text style={styles.listingText}>{listing.name}</Text>
+              <Text style={styles.listingCaption}>{listing.location}</Text>
+              <Text style={styles.listingCaption}>{listing.details}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </SwipeRow>
     );
   };
 
   return (
     <FlatList
       data={listings.filter((listing) => favorites.includes(listing.id))}
-      renderItem={renderFavoriteItem}
-      keyExtractor={(item) => item.id.toString()}
+      renderItem={renderFavoriteListing}
+      keyExtractor={(listing) => listing.id.toString()}
     />
   );
 };
 
 const styles = StyleSheet.create({
+  deleteView: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    flex: 1,
+  },
+  deleteTouchable: {
+    backgroundColor: "red",
+    height: "100%",
+    justifyContent: "center",
+  },
+  deleteText: {
+    color: "white",
+    fontWeight: "700",
+    textAlign: "center",
+    fontSize: 16,
+    width: 100,
+  },
   rowContainer: {
     flexDirection: "row",
     alignItems: "center",

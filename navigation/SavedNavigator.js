@@ -23,6 +23,15 @@ const SavedNavigator = () => {
           justifyContent: "center",
         }}
       />
+      <SavedStack.Screen
+        name="ListingDetail"
+        component={ListingDetailScreen}
+        options={{
+          headerShown: true,
+          title: "Listing Detail",
+          justifyContent: "center",
+        }}
+      />
     </SavedStack.Navigator>
   );
 };

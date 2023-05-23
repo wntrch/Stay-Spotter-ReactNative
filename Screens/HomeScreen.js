@@ -25,6 +25,7 @@ const HomeScreen = ({ navigation, route }) => {
   const favorites = useSelector((state) => state.favorites);
 
   const handleAddToFavorites = (listing) => {
+    console.log("Listing: ", listing);
     dispatch(toggleFavorite(listing.id));
   };
 
@@ -39,7 +40,10 @@ const HomeScreen = ({ navigation, route }) => {
     (category) => spotType === "all" || category.spotType === spotType
   );
   const filteredListings = listings.filter(
-    (listing) => spotType === "all" || listing.spotType.includes(spotType)
+    (listing) =>
+      spotType === "all" ||
+      (listing.spotType.includes(spotType) &&
+        listing.name.toLowerCase().includes(search.toLowerCase()))
   );
 
   const chunkArray = (array, chunkSize) => {

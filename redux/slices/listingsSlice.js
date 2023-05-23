@@ -33,4 +33,4 @@ const listingsSlice = createSlice({
   },
 });
 
-export default listingsReducer = listingsSlice.reducer;
+export const listingsReducer = listingsSlice.reducer;

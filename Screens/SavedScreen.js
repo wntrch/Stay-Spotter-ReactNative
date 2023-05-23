@@ -19,12 +19,13 @@ const SavedScreen = ({ navigation }) => {
         style={styles.listingContainer}
         onPress={() => navigation.navigate("ListingDetail", { item: item })}
       >
-        <View style={styles.innerContainer}>
+        <View style={styles.rowContainer}>
           <Image source={{ uri: item.image }} style={styles.listingImage} />
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.listingText}>{item.name}</Text>
-          <Text style={styles.listingCaption}>{item.caption}</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.listingText}>{item.name}</Text>
+            <Text style={styles.listingCaption}>{item.location}</Text>
+            <Text style={styles.listingCaption}>{item.details}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -40,11 +41,15 @@ const SavedScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  rowContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   listingContainer: {
     margin: 7,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 5,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    padding: 10,
     paddingTop: 10,
     backgroundColor: "#cac200",
     borderRadius: 12,
@@ -60,7 +65,8 @@ const styles = StyleSheet.create({
   listingImage: {
     borderRadius: 12,
     height: 100,
-    width: "100%",
+    width: "30%",
+    marginRight: 10,
   },
   listingText: {
     color: "#000",
@@ -71,11 +77,7 @@ const styles = StyleSheet.create({
   listingCaption: {
     color: "#000",
     fontSize: 10,
-    paddingTop: 2,
-  },
-  innerContainer: {
-    alignItems: "center",
-    width: "90%",
+    paddingTop: 6,
   },
   textContainer: {
     alignSelf: "stretch",

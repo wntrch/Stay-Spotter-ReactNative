@@ -136,7 +136,7 @@ export const listings = [
     details: "4 guests / 1 bedroom / 2 beds / 1 bath",
     caption: "4 guests / 2 beds / 1 bath",
     price: "$485 / night",
-    location: "New York, United States",
+    location: "Manhattan, New York, United States",
     amenities: [
       "Kitchen",
       "Wifi",

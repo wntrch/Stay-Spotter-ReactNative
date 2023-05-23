@@ -27,6 +27,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/2d70b539-b5a1-406f-8e6b-0c4524a07fd0.jpg?im_w=1440",
     ],
     spotType: ["cabin", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 1,
@@ -60,6 +61,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/30e5ba96-074e-492c-a201-0f47193119f2.jpg?im_w=1440",
     ],
     spotType: ["trending", "lakefront", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 2,
@@ -93,6 +95,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/prohost-api/Hosting-780007512498865966/original/5dde468e-ed83-428f-8378-5cc61496753c.jpeg?im_w=1440",
     ],
     spotType: ["all", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 3,
@@ -126,6 +129,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/215e220b-e005-4056-b749-20ba765250c9.jpg?im_w=720",
     ],
     spotType: ["trending", "beachside", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 4,
@@ -158,6 +162,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/miso/Hosting-39758327/original/456490b2-5849-4602-ba2b-c30208bca569.jpeg?im_w=1440",
     ],
     spotType: ["urban", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 5,
@@ -191,6 +196,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/prohost-api/Hosting-16996051/original/8d127304-278e-4422-b1aa-fc8e940f673e.jpeg?im_w=1440",
     ],
     spotType: ["all", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 6,
@@ -223,6 +229,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/miso/Hosting-34543794/original/9abe98de-3451-4a54-992c-a01cc593b4bb.jpeg?im_w=1440",
     ],
     spotType: ["trending", "urban", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 7,
@@ -256,6 +263,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/ea58fbd9-e346-46d6-9ab3-be2de5a7b55d.jpg?im_w=1440",
     ],
     spotType: ["lakefront", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 8,
@@ -288,6 +296,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/prohost-api/Hosting-554961927067383719/original/9aec9337-8d2c-47fa-9069-22796a86d258.jpeg?im_w=1440",
     ],
     spotType: ["trending", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 9,
@@ -321,6 +330,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/prohost-api/Hosting-49718048/original/1dbdc601-379c-4d29-b5a5-4d66bfaee0c9.jpeg?im_w=1440",
     ],
     spotType: ["cabin", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 10,
@@ -354,6 +364,7 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/29661bc3-74e8-4347-becb-584024cfd1fc.jpg?im_w=1440",
     ],
     spotType: ["all", "listing"],
+    swipeDisabled: false,
   },
   {
     id: 11,
@@ -387,5 +398,6 @@ export const listings = [
       "https://a0.muscache.com/im/pictures/miso/Hosting-661517494281863336/original/1d9c0ff4-fe66-4ec6-bef2-431783919a99.jpeg?im_w=1440",
     ],
     spotType: ["all", "listing"],
+    swipeDisabled: false,
   },
 ];

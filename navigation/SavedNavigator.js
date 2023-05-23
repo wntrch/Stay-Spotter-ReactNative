@@ -27,7 +27,7 @@ const SavedNavigator = () => {
         name="ListingDetail"
         component={ListingDetailScreen}
         options={{
-          headerShown: true,
+          headerShown: false,
           title: "Listing Detail",
           justifyContent: "center",
         }}

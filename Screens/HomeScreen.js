@@ -6,12 +6,9 @@ import { TouchableOpacity } from "react-native";
 import { categories } from "../data/categories";
 import { listings } from "../data/listings";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../redux/slices/favoritesSlice";
-
-const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation, route }) => {
   const [search, setSearch] = useState("");
@@ -311,8 +308,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.75)",
-    borderRadius: 15, // Adjust this to match your design
-    padding: 5, // Also adjust this
+    borderRadius: 15,
+    padding: 5,
   },
 
   // Text Container styles

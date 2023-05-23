@@ -22,8 +22,12 @@
     "react": "18.1.0",
     "react-native": "0.70.8",
     "react-native-elements": "^3.4.3",
+    "react-native-gesture-handler": "~2.8.0",
     "react-native-linear-gradient": "^2.6.2",
+    "react-native-reanimated-carousel": "^3.3.2",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-swipe-list-view": "^3.2.9",
+    "react-native-swiper-flatlist": "^3.2.2",
     "react-navigation": "^4.4.4",
     "react-redux": "^8.0.5"
   },

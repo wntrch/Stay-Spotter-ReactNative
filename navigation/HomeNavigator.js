@@ -25,7 +25,11 @@ const HomeNavigator = () => {
       <HomeStack.Screen
         name="ListingDetail"
         component={ListingDetailScreen}
-        options={{ headerShown: true }}
+        options={{
+          headerShown: false,
+          title: "Listing Detail",
+          justifyContent: "center",
+        }}
       />
     </HomeStack.Navigator>
   );

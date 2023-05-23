@@ -18,56 +18,51 @@ const SavedScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const renderFavoriteListing = ({ item: listing }) => {
-    const handleDelete = (listing) => {
-      Alert.alert(
-        "Delete Favorite?",
-        "Are you sure you wish to delete the favorite listing " +
-          listing.name +
-          "?",
-        [
-          {
-            text: "Cancel",
-            onPress: () => console.log(listing.name + " Not Deleted"),
-            style: "cancel",
-          },
-          {
-            text: "OK",
-            onPress: () => dispatch(toggleFavorite(listing.id)),
-          },
-        ],
-        { cancelable: false }
-      );
-    };
+    // const handleDelete = (listing) => {
+    //   Alert.alert(
+    //     "Delete Favorite?",
+    //     "Are you sure you wish to delete the favorite listing " +
+    //       listing.name +
+    //       "?",
+    //     [
+    //       {
+    //         text: "Cancel",
+    //         onPress: () => console.log(listing.name + " Not Deleted"),
+    //         style: "cancel",
+    //       },
+    //       {
+    //         text: "OK",
+    //         onPress: () => dispatch(toggleFavorite(listing.id)),
+    //       },
+    //     ],
+    //     { cancelable: false }
+    //   );
+    // };
 
     return (
-      <SwipeRow rightOpenValue={-100}>
-        <View style={styles.deleteView}>
-          <TouchableOpacity
-            style={styles.deleteTouchable}
-            onPress={() => handleDelete(listing)}
-          >
-            <Text style={styles.deleteText}>Delete</Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity
-          style={styles.listingContainer}
-          onPress={() =>
-            navigation.navigate("ListingDetail", { item: listing })
-          }
-        >
-          <View style={styles.rowContainer}>
-            <Image
-              source={{ uri: listing.image }}
-              style={styles.listingImage}
-            />
-            <View style={styles.textContainer}>
-              <Text style={styles.listingText}>{listing.name}</Text>
-              <Text style={styles.listingCaption}>{listing.location}</Text>
-              <Text style={styles.listingCaption}>{listing.details}</Text>
-            </View>
+      // <SwipeRow rightOpenValue={-100}>
+      // <View style={styles.deleteView}>
+      // <TouchableOpacity
+      //   style={styles.deleteTouchable}
+      //   onPress={() => handleDelete(listing)}
+      // >
+      //   <Text style={styles.deleteText}>Delete</Text>
+      // </TouchableOpacity>
+      // </View>
+      <TouchableOpacity
+        style={styles.listingContainer}
+        onPress={() => navigation.navigate("ListingDetail", { item: listing })}
+      >
+        <View style={styles.rowContainer}>
+          <Image source={{ uri: listing.image }} style={styles.listingImage} />
+          <View style={styles.textContainer}>
+            <Text style={styles.listingText}>{listing.name}</Text>
+            <Text style={styles.listingCaption}>{listing.location}</Text>
+            <Text style={styles.listingCaption}>{listing.details}</Text>
           </View>
-        </TouchableOpacity>
-      </SwipeRow>
+        </View>
+      </TouchableOpacity>
+      // </SwipeRow>
     );
   };
 
